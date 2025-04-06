@@ -29,7 +29,7 @@ jobs:
         run: |
           gh release create v${{ env.VERSION }} --notes "Release notes for version ${{ env.VERSION }}"
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Git tag
         run: |

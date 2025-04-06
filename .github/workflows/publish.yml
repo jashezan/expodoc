@@ -38,4 +38,4 @@ jobs:
           git commit -m "Bump version to v$(node -p "require('./package.json').version")"
           git push origin main --follow-tags
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
