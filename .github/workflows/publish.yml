@@ -1,38 +1,33 @@
-name: Publish to npm
+name: Publish
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'package.json'  # Only trigger if package.json is changed
+      - "package.json"
+      - ".changeset/**"
 
 jobs:
   publish:
-    name: Build & Publish
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      id-token: write  # Required for npm provenance
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Use Node.js 22
-        uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: '22'
-          registry-url: 'https://registry.npmjs.org/'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build the package
-        run: npm run build
+      - name: Run Changeset versioning
+        run: npx changeset version
 
-      - name: Publish to npm
-        run: npm publish --access public
+      - name: Publish package to npm
+        run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,41 +1,37 @@
-name: Release & Publish
+name: Release
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - '**/*.ts'       # Make sure only TypeScript-related changes trigger the build
-      - 'package.json'  # Trigger when package.json changes (e.g., version bump)
+  workflow_run:
+    workflows: ["Publish"]  # Name of the publish workflow
+    types:
+      - completed
 
 jobs:
-  release:
-    name: Version, Tag, Release, and Publish
+  create-release:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-      id-token: write
-      packages: write
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Setup Node.js 22
-        uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: '22'
-          registry-url: 'https://registry.npmjs.org/'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Get current version
+        id: version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-      - name: Run Changesets Versioning
-        uses: changesets/action@v1
-        with:
-          version: npm run version-packages  # Bumps version based on changesets
-          publish: npm run release  # Publishes package
+      - name: Create GitHub Release
+        run: |
+          gh release create v${{ env.VERSION }} --notes "Release notes for version ${{ env.VERSION }}"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub Token for tagging/releases
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # NPM Token for npm publishing
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Git tag
+        run: |
+          git tag -a v${{ env.VERSION }} -m "Release v${{ env.VERSION }}"
+          git push origin v${{ env.VERSION }}
