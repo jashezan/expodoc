@@ -70,7 +70,6 @@
         "format:fix": "biome format --write .",
         "help": "tsc && node ./dist/cli/index.js --help",
         "init": "tsc && node ./dist/cli/index.js --init",
-        "install": "npm install",
         "lint": "biome lint .",
         "lint:fix": "biome lint --write .",
         "postman": "tsc && node ./dist/cli/index.js --postman",
