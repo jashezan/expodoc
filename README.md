@@ -10,23 +10,23 @@ A tool to generate API documentation automatically for Express.js applications.
 ## Installation
 
 ```bash
-npm install express-docgen
+npm install expodoc
 ```
 
 ## Usage
 
 ```bash
-npx express-docgen --init # Initialize the config file
+npx expodoc --init # Initialize the config file
 ```
 
 ```bash
-npx express-docgen --help # Show help
+npx expodoc --help # Show help
 ```
 
 ```bash
-npx express-docgen --postman # Generate Postman documentation
+npx expodoc --postman # Generate Postman documentation
 ```
 
 ```bash
-npx express-docgen --version # Show version
+npx expodoc --version # Show version
 ```

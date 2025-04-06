@@ -1,5 +1,5 @@
 export const configTemplates = {
-    typescript: `import type { ExpressDocGenConfigType } from 'express-docgen';
+    typescript: `import type { ExpressDocGenConfigType } from 'expodoc';
   
   const config: ExpressDocGenConfigType = {
     SERVER_URL: "http://localhost:4000",

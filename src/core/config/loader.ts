@@ -8,8 +8,8 @@ export async function loadConfig(): Promise<ExpressDocGenConfigType> {
     const configPaths = [
         resolve("docgen.config.ts"),
         resolve("docgen.config.js"),
-        resolve("express-docgen.config.ts"),
-        resolve("express-docgen.config.js"),
+        resolve("expodoc.config.ts"),
+        resolve("expodoc.config.js"),
     ];
 
     const configPromises = configPaths.map(async (path) => {

@@ -3,12 +3,12 @@ import { fileExists, writeFile } from "../core/utils/fileSystem";
 import { isTypeScriptProject } from "../core/utils/project";
 
 /**
- * Initializes the `express-docgen.config.ts` or `.js` based on project language.
+ * Initializes the `expodoc.config.ts` or `.js` based on project language.
  */
 export function initConfig(): void {
     const isTS = isTypeScriptProject();
 
-    const fileName = `express-docgen.config.${isTS ? "ts" : "js"}`;
+    const fileName = `expodoc.config.${isTS ? "ts" : "js"}`;
     const content = isTS
         ? configTemplates.typescript
         : configTemplates.javascript;

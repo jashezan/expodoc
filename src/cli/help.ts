@@ -4,7 +4,7 @@ export function helpCommand(): void {
 
 A tool to generate API documentation automatically for Express.js applications.
 
-Usage: express-docgen [options]
+Usage: expodoc [options]
 
 Options:
 --version  Show version
@@ -14,10 +14,10 @@ Options:
 --print    Print the routes in JSON format
 
 Examples:
-✓ $ express-docgen --version
-✓ $ express-docgen --help
-✓ $ express-docgen --init
-✓ $ express-docgen --postman
-✓ $ express-docgen --print
+✓ $ expodoc --version
+✓ $ expodoc --help
+✓ $ expodoc --init
+✓ $ expodoc --postman
+✓ $ expodoc --print
 `);
 }

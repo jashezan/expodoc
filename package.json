@@ -1,7 +1,7 @@
 {
     "author": "Jubyer Ahmed Shezan",
     "bin": {
-        "express-docgen": "./dist/cli/index.js"
+        "expodoc": "./dist/cli/index.js"
     },
     "contributes": {
         "biome.check": {
@@ -19,14 +19,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/jashezan/express-docgen.git"
+        "url": "https://github.com/jashezan/expodoc.git"
     },
     "bugs": {
-        "url": "https://github.com/jashezan/express-docgen/issues"
+        "url": "https://github.com/jashezan/expodoc/issues"
     },
     "homepage": {
         "type": "git",
-        "url": "https://github.com/jashezan/express-docgen"
+        "url": "https://github.com/jashezan/expodoc"
     },
     "contributors": ["Jubyer Ahmed Shezan <jashezan@gmail.com>"],
     "dependencies": {},
@@ -36,7 +36,7 @@
         "ts-node": "^10.9.2",
         "typescript": "^5.8.3"
     },
-    "displayName": "express-docgen",
+    "displayName": "expodoc",
     "exports": {
         ".": {
             "import": "./dist/index.js",
@@ -51,12 +51,12 @@
         "docgen",
         "typescript",
         "cli",
-        "express-docgen",
+        "expodoc",
         "expressjs",
         "express-api"
     ],
     "license": "MIT",
-    "name": "express-docgen",
+    "name": "expodoc",
     "pricing": "Free",
     "private": false,
     "publisher": "Jubyer Ahmed Shezan",
