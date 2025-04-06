@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Get current version
+      - name: Get current version from package.json
         id: version
         run: |
           VERSION=$(node -p "require('./package.json').version")
@@ -29,7 +29,7 @@ jobs:
         run: |
           gh release create v${{ env.VERSION }} --notes "Release notes for version ${{ env.VERSION }}"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Create Git tag
         run: |

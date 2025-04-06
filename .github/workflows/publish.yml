@@ -31,3 +31,11 @@ jobs:
         run: npm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Commit and push version updates
+        run: |
+          git add package.json package-lock.json
+          git commit -m "Bump version to v$(node -p "require('./package.json').version")"
+          git push origin main --follow-tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
