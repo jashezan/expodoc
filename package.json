@@ -1,0 +1,84 @@
+{
+    "author": "Jubyer Ahmed Shezan",
+    "bin": {
+        "express-docgen": "./dist/cli/index.js"
+    },
+    "contributes": {
+        "biome.check": {
+            "command": "biome check .",
+            "description": "Check the code for errors and warnings."
+        },
+        "biome.format": {
+            "command": "biome format .",
+            "description": "Format the code according to the style guide."
+        },
+        "biome.lint": {
+            "command": "biome lint .",
+            "description": "Lint the code for potential issues."
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jashezan/express-docgen.git"
+    },
+    "bugs": {
+        "url": "https://github.com/jashezan/express-docgen/issues"
+    },
+    "homepage": {
+        "type": "git",
+        "url": "https://github.com/jashezan/express-docgen"
+    },
+    "contributors": ["Jubyer Ahmed Shezan <jashezan@gmail.com>"],
+    "dependencies": {},
+    "description": "A tool to generate API documentation automatically for Express.js applications.",
+    "devDependencies": {
+        "@biomejs/biome": "^1.9.4",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.3"
+    },
+    "displayName": "express-docgen",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.js"
+        }
+    },
+    "keywords": [
+        "express",
+        "postman",
+        "documentation",
+        "api",
+        "docgen",
+        "typescript",
+        "cli",
+        "express-docgen",
+        "expressjs",
+        "express-api"
+    ],
+    "license": "MIT",
+    "name": "express-docgen",
+    "pricing": "Free",
+    "private": false,
+    "publisher": "Jubyer Ahmed Shezan",
+    "scripts": {
+        "build": "rm -rf dist && tsc",
+        "build:gen": "tsc",
+        "check": "biome check .",
+        "check:fix": "biome check --fix .",
+        "clear": "rm -rf dist && rm -rf node_modules",
+        "format": "biome format .",
+        "format:fix": "biome format --write .",
+        "help": "tsc && node ./dist/cli/index.js --help",
+        "init": "tsc && node ./dist/cli/index.js --init",
+        "install": "npm install",
+        "lint": "biome lint .",
+        "lint:fix": "biome lint --write .",
+        "postman": "tsc && node ./dist/cli/index.js --postman",
+        "prepare": "npm run build",
+        "print": "tsc && node ./dist/cli/index.js --print",
+        "validate": "biome format --write . && biome lint --write . && biome check --write .",
+        "version": "tsc && node ./dist/cli/index.js --version"
+    },
+    "trustedDependencies": ["@biomejs/biome"],
+    "version": "1.0.0"
+}

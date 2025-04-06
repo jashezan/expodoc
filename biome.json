@@ -1,0 +1,118 @@
+{
+    "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+    "assists": {
+        "actions": {
+            "source": {
+                "sortJsxProps": "on",
+                "useSortedKeys": "on"
+            }
+        },
+        "enabled": true,
+        "ignore": [
+            "node_modules/**",
+            "dist/**",
+            ".git/**",
+            ".next/**",
+            "out/**",
+            "public/**"
+        ]
+    },
+    "css": {
+        "formatter": {
+            "enabled": true,
+            "indentStyle": "space",
+            "indentWidth": 4,
+            "lineWidth": 80,
+            "quoteStyle": "double"
+        }
+    },
+    "files": {
+        "ignore": [
+            "node_modules/**",
+            "dist/**",
+            ".git/**",
+            ".next/**",
+            "out/**",
+            "public/**"
+        ],
+        "ignoreUnknown": false
+    },
+    "formatter": {
+        "attributePosition": "auto",
+        "bracketSpacing": true,
+        "enabled": true,
+        "ignore": [
+            "node_modules/**",
+            "dist/**",
+            ".git/**",
+            ".next/**",
+            "out/**",
+            "public/**"
+        ],
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineWidth": 80
+    },
+    "javascript": {
+        "formatter": {
+            "arrowParentheses": "always",
+            "attributePosition": "auto",
+            "bracketSameLine": true,
+            "bracketSpacing": true,
+            "enabled": true,
+            "indentWidth": 4,
+            "jsxQuoteStyle": "double",
+            "lineWidth": 80,
+            "quoteProperties": "asNeeded",
+            "quoteStyle": "double",
+            "semicolons": "always",
+            "trailingCommas": "all"
+        }
+    },
+    "linter": {
+        "enabled": true,
+        "ignore": [
+            "node_modules/**",
+            "dist/**",
+            ".git/**",
+            ".next/**",
+            "out/**",
+            "public/**"
+        ],
+        "rules": {
+            "complexity": {
+                "noBannedTypes": "off",
+                "noForEach": "off"
+            },
+            "recommended": true,
+            "security": {
+                "noGlobalEval": "off"
+            },
+            "style": {
+                "noNonNullAssertion": "off",
+                "noUselessElse": "off",
+                "useConst": "off"
+            },
+            "suspicious": {
+                "noExplicitAny": "off"
+            }
+        }
+    },
+    "organizeImports": {
+        "enabled": true,
+        "ignore": [
+            "node_modules/**",
+            "dist/**",
+            ".git/**",
+            ".next/**",
+            "out/**",
+            "public/**"
+        ]
+    },
+    "vcs": {
+        "clientKind": "git",
+        "enabled": false,
+        "root": ".",
+        "useIgnoreFile": false
+    }
+}
