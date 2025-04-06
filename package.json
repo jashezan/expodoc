@@ -3,6 +3,9 @@
     "bin": {
         "expodoc": "./dist/cli/index.js"
     },
+    "bugs": {
+        "url": "https://github.com/jashezan/expodoc/issues"
+    },
     "contributes": {
         "biome.check": {
             "command": "biome check .",
@@ -17,22 +20,11 @@
             "description": "Lint the code for potential issues."
         }
     },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/jashezan/expodoc.git"
-    },
-    "bugs": {
-        "url": "https://github.com/jashezan/expodoc/issues"
-    },
-    "homepage": {
-        "type": "git",
-        "url": "https://github.com/jashezan/expodoc"
-    },
     "contributors": ["Jubyer Ahmed Shezan <jashezan@gmail.com>"],
-    "dependencies": {},
     "description": "A tool to generate API documentation automatically for Express.js applications.",
     "devDependencies": {
         "@biomejs/biome": "^1.9.4",
+        "@changesets/cli": "^2.28.1",
         "ts-node": "^10.9.2",
         "typescript": "^5.8.3"
     },
@@ -42,6 +34,10 @@
             "import": "./dist/index.js",
             "require": "./dist/index.js"
         }
+    },
+    "homepage": {
+        "type": "git",
+        "url": "https://github.com/jashezan/expodoc"
     },
     "keywords": [
         "express",
@@ -60,6 +56,10 @@
     "pricing": "Free",
     "private": false,
     "publisher": "Jubyer Ahmed Shezan",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jashezan/expodoc.git"
+    },
     "scripts": {
         "build": "rm -rf dist && tsc",
         "build:gen": "tsc",
@@ -74,9 +74,12 @@
         "lint:fix": "biome lint --write .",
         "postman": "tsc && node ./dist/cli/index.js --postman",
         "prepare": "npm run build",
+        "prepublishOnly": "npm run build",
         "print": "tsc && node ./dist/cli/index.js --print",
+        "release": "changeset publish",
         "validate": "biome format --write . && biome lint --write . && biome check --write .",
-        "version": "tsc && node ./dist/cli/index.js --version"
+        "version": "tsc && node ./dist/cli/index.js --version",
+        "version-packages": "changeset version"
     },
     "trustedDependencies": ["@biomejs/biome"],
     "version": "1.0.0"
