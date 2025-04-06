@@ -1,4 +1,4 @@
-name: Publish to npm
+name: Publish and Release
 
 on:
   push:
@@ -6,18 +6,18 @@ on:
       - main
 
 jobs:
-  publish:
+  publish-and-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetch all history for changesets to work correctly
+          fetch-depth: 0 # Fetch all history for changesets
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22' # Specify the Node.js version you want to use
+          node-version: '22'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
@@ -29,11 +29,22 @@ jobs:
       - name: Publish to npm
         run: npm run release
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Use the NPM_TOKEN from GitHub secrets
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Trigger release workflow
-        if: success() # Only trigger if publish succeeds
+      - name: Version packages
+        run: npm run version-packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit version changes and create tag
         run: |
-          gh workflow run release.yml -f version=${{ github.sha }}
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "chore: update versions and changelog [skip ci]" || echo "No changes to commit"
+          VERSION=$(node -p "require('./package.json').version")
+          git tag -a "v${VERSION}" -m "Release v${VERSION}"
+          git push
+          git push --tags
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
