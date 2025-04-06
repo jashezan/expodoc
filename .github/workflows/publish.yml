@@ -1,41 +1,39 @@
-name: Publish
+name: Publish to npm
 
 on:
   push:
     branches:
       - main
-    paths:
-      - "package.json"
-      - ".changeset/**"
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/checkout@v4
         with:
-          node-version: '22'
+          fetch-depth: 0 # Fetch all history for changesets to work correctly
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22' # Specify the Node.js version you want to use
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Changeset versioning
-        run: npx changeset version
+      - name: Build the project
+        run: npm run build
 
-      - name: Publish package to npm
-        run: npm publish
+      - name: Publish to npm
+        run: npm run release
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Use the NPM_TOKEN from GitHub secrets
 
-      - name: Commit and push version updates
+      - name: Trigger release workflow
+        if: success() # Only trigger if publish succeeds
         run: |
-          git add package.json package-lock.json
-          git commit -m "Bump version to v$(node -p "require('./package.json').version")"
-          git push origin main --follow-tags
+          gh workflow run release.yml -f version=${{ github.sha }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
